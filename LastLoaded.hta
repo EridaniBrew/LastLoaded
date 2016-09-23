@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Current ACP System</title>
+<HTA:APPLICATION 
+     ID="objACPSwap"
+     APPLICATIONNAME="ACP Swapped in System"
+     SCROLL="auto"
+     SINGLEINSTANCE="yes"
+>
+<STYLE type="text/css">
+body,html{
+  height: 100%;
+}
+#OuterDiv{
+  width:100%;
+  height:100%;   
+  position: relative;
+}
+#Header{
+  width: 100%;
+  background: SlateBlue;
+  padding:  10px 0 10px 0;
+}
+#ACPSwapTitle{
+  font-size: large;
+  color: LightBlue;
+}
+
+</STYLE>
+</head>
+
+<SCRIPT LANGUAGE="VBScript">
+' When BrewSystemSwap script is run, it leaves the name of the system swapped in
+' in the file 000LastLoaded.txt.
+' Just copy the contents of the file into the screen widget.
+
+
+    CONST FILE_LAST_LOADED = "C:\Users\Public\Documents\ACP Web Data\Doc Root\SystemSwap\000LastLoaded.txt"
+
+
+    Sub Window_OnLoad
+        dim fso, loadfile
+        dim s
+        window.resizeTo 400,140
+
+        ' Read the file
+        Set fso = CreateObject("Scripting.FileSystemObject" )            
+        Set loadfile = fso.OpenTextFile(FILE_LAST_LOADED ,1,1) 
+        s = loadfile.ReadLine
+        loadfile.Close
+        ACPSwapTitle.InnerHTML = s
+
+    End Sub
+
+</SCRIPT>
+
+<body>
+<form>
+<div id="OuterDiv">
+<div id=Header>
+<center><span id="ACPSwapTitle" >Last Loaded ACP System</span></center>
+</div>
+
+</div>
+</form>
+
+
+
+
+</body>
+</html>
